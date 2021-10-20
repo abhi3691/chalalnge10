@@ -1,13 +1,14 @@
 import React ,{Component} from 'react'
 
-import {View, Text, StyleSheet,ActivityIndicator , FlatList,} from 'react-native'
+import {View, Text, StyleSheet,ActivityIndicator , FlatList,Image} from 'react-native'
 import axios from 'axios'
 export default class Category extends Component{
     constructor(){
         super();
         this.state = {
             loader : false,
-            DATA :[]
+            DATA :[],
+           
         }
     }
     getData(){
@@ -49,6 +50,9 @@ export default class Category extends Component{
             <View style={styles.itemContainer} >
                 <Text style={styles.itemText} > {item.name} </Text>
                 <Text style={styles.itemDes} > {item.price} </Text>
+                <Image
+                style={styles.itemImage}
+                source={{uri: item.image}}  />
                
              </View>
         )
@@ -107,5 +111,10 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         marginTop:10,
     },
-
+    itemImage:{
+        height:100,
+        width:100,
+        borderRadius:8,
+       
+   }
 })
