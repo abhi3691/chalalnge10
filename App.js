@@ -112,9 +112,9 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     itemImage:{
-        height:100,
+        height:150,
         width:100,
-        borderRadius:8,
+       
        
    }
 })
