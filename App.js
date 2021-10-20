@@ -1,7 +1,7 @@
 import React ,{Component} from 'react'
 
 import {View, Text, StyleSheet,ActivityIndicator , FlatList,} from 'react-native'
-
+import axios from 'axios'
 export default class Category extends Component{
     constructor(){
         super();
@@ -19,13 +19,27 @@ export default class Category extends Component{
                 this.setState({DATA : response})
             }
             this.setState({loader :false})
-            console.log('YOUR RESPONSE IS :',response)
+           // console.log('YOUR RESPONSE IS :',response)
         })
          .catch((error) => {
             this.setState({loader :false})
              console.log('Error is :' ,error)
          })
 
+    }
+
+    getAxiosData(){
+        this.setState({loader:true})
+        axios.get('https://api.sampleapis.com/beers/ale')
+        .then((response) =>{
+            this.setState({loader:false})
+            console.log('AXIOS RESPONSE IS :',response)
+
+        })
+        .catch((error)=>{
+            this.setState({loader:false})
+            console.log('AXIOS  error is :',error)
+        })
     }
     componentDidMount() {
         this.getData()
@@ -39,14 +53,18 @@ export default class Category extends Component{
              </View>
         )
         return(
+           
             <View style ={styles.container}>
+
                 <ActivityIndicator size ={50} color ='blue' animating={this.state.loader} />
                 <Text style={styles.headerText}
-                onPress = {() => this.getData()}>Beers Price List</Text>
+                onPress = {() => this.getAxiosData()}>Beers Price List</Text>
                 <FlatList  style={{width :'95%',marginTop: 10}} 
                 data ={this.state.DATA}
                 renderItem = {renderItem} />
+
             </View>
+           
             
         )
     }
